@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin-control
+
+Sitemap: https://abrasivegrit.in/sitemap.xml
