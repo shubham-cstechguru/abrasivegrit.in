@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 
 // Login
-    Route::get('admin-control/mobile', 'admin\MobileController@index');
+    // Route::get('admin-control/mobile', 'admin\MobileController@index');
     Route::get('admin-control/reset-password', 'admin\ResetpasswordController@index');
 
 Route::group(['prefix' => 'admin-control', 'middleware' => 'guest'], function() {
@@ -97,6 +97,12 @@ Route::get('/clear-cache', function() {
     Route::get('faqs/remove/{id}','admin\FaqsController@remove');
     Route::post('faqs/removeMultiple','admin\FaqsController@removeMultiple');
     
+// city, country
+
+    Route::resources([
+        'city' => 'admin\CityController',
+        'country' => 'admin\CountryController',
+    ]);
 
 
 // change password

@@ -29,7 +29,7 @@ class UserController extends Controller {
 
         $rules = [
             'user_login'    => 'required',
-            'password'  => 'required|min:6|max:20'
+            'password'  => 'required|max:20'
         ];
         $request->validate( $rules );
 
