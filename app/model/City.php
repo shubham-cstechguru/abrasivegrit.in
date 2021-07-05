@@ -10,6 +10,6 @@ class City extends Model
 
     public function country()
     {
-        return $this->hasOne('App\Model\Country', 'id', 'country_id');
+        return $this->hasOne('App\model\Country', 'id', 'country_id');
     }
 }

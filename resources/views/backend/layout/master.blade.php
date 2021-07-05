@@ -277,6 +277,18 @@ $setting = App\Model\Setting::findOrFail(1);
                 form.action = '/admin-control/' + deletename + '/' + id
                 $('#deleteModal').modal('show')
             }
+            
+            function addcity(id) {
+                var form1 = document.getElementById('cityFormModal')
+                form1.action = '/admin-control/product/product-city/' + id
+                $('#cityModal').modal('show')
+            }
+
+            function addcountry(id) {
+                var form2 = document.getElementById('countryFormModal')
+                form2.action = '/admin-control/product/product-country/' + id
+                $('#countryModal').modal('show')
+            }
         </script>
 
 </body>

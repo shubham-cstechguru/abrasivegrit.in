@@ -22,6 +22,8 @@ Route::get('/about', 'AboutusController@index');
 Route::get('/blog', 'BlogController@index'); 
 Route::get('/product', 'ProductController@index'); 
 Route::get('/contact', 'ContactController@index'); 
+Route::get('/city/{slug}', 'LocationController@city')->name('frontcity'); 
+Route::get('/country/{slug}', 'LocationController@country')->name('frontcountry'); 
 Route::get('sitemap.xml/', 'SitemapController@index');
 Route::get('sitemap.xml/product', 'SitemapController@articles');
 Route::get('sitemap.xml/category', 'SitemapController@categories');
