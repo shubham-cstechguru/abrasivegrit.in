@@ -3,6 +3,7 @@ $setting = App\Model\Setting::findOrFail(1);
 $blog = App\model\Blog::latest()->paginate(2);
 $cities = App\model\City::get();
 $countries = App\model\Country::get();
+$date = date('Y')
 
 @endphp
 <!DOCTYPE html>
@@ -157,6 +158,9 @@ $countries = App\model\Country::get();
     @section('footer')
     <section class="row footer-section mt-0">
       <div class="container mb-4">
+        <div class="section-title" style="color: #fff;">
+          <p class="text-center other-heading">LOCATIONS</p>
+        </div>
         <div class="city-links text-left">
           @foreach($cities as $c)
           <a href="{{ route('frontcity', $c->slug) }}" class=""><i class="icon-location mr-1"></i>{{ $c->name }}</a>
@@ -258,7 +262,7 @@ $countries = App\model\Country::get();
             <!--<a href="#" class="tumblr"><i class="icon-tumblr-square"></i><span>tumblr</span></a>-->
           </div>
 
-          <p class="text-white text-center mt-5">Copyright &copy; All rights reserved Abrasivegrit. Website Design and Developed by <a href="https://www.suncitygroup.org/" target="_blank">Suncity Group</a></p>
+          <p class="text-white text-center mt-5">Copyright &copy; {{$date}} All rights reserved {{ $setting->sitename }}. Website Design and Developed by A2ZProviders</p>
 
         </div>
       </div>

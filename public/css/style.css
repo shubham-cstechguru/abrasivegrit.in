@@ -1101,7 +1101,7 @@ li {
 
 .city-links a i {
     font-size: 16px;
-    color: #d7d7d7;
+    color: #fff;
     float: left;
     overflow: hidden;
     -webkit-transition: all 0.3s;
@@ -1118,4 +1118,12 @@ li {
     -webkit-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
+}
+
+.city-links a:hover {
+    color: rgba(0,0,0,.7);
+}
+
+.city-links a:hover i{
+    color: rgba(0,0,0,.7);
 }

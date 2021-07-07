@@ -7,6 +7,7 @@ use App\model\Country;
 use App\model\City;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
@@ -45,25 +46,36 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'record.name' => 'required|string|unique:mysql.countries,name|max:255',
+            'record.name' => 'required|string|unique:mysql.cities,name|max:255',
+            'record.short_name' => 'required|string|max:5',
         ];
 
         $messages = [
-            'record.name.required'   => 'City Name is required.',
+            'record.name.required'   => 'City Name must be required.',
             'record.name.string'   => 'City Name contain only alphabets.',
-            'record.name.unique'   => 'City Name is unique.',
-            'record.name.max'   => 'City Name is max of 255 charcters.',
+            'record.name.unique'   => 'City Name must be unique.',
+            'record.name.max'   => 'City Name must be max of 255 charcters.',
+            'record.short_name.required'   => 'City Shortname Name must be required.',
+            'record.short_name.string'   => 'City Shortname Name contain only alphabets.',
+            'record.short_name.max'   => 'City Shortname Name must be max of 5 charcters.',
         ];
 
-        $request->validate($rules, $messages);
+        $validator  = Validator::make($request->all(), $rules, $messages);
 
-        $city = new City($request->record);
 
-        $city->slug = Str::slug($request->record['name'], '-');
+        if ($validator->fails()) {
+            return redirect(route('city.create'))
+                ->withErrors($validator->errors()->all())
+                ->withInput();
+        } else {
+            $city = new City($request->record);
 
-        $city->save();
+            $city->slug = Str::slug($request->record['name'], '-');
 
-        return redirect(route('city.index'))->with('success', 'City successfully added.');
+            $city->save();
+
+            return redirect(route('city.index'))->with('success', 'City successfully added.');
+        }
     }
 
     /**
@@ -101,23 +113,36 @@ class CityController extends Controller
     public function update(Request $request, City $city)
     {
         $rules = [
-            'record.name' => 'required|string|max:255|unique:mysql.countries,name,' . $city->id
+            'record.name' => 'required|string|max:255|unique:mysql.cities,name,' . $city->id,
+            'record.short_name' => 'required|string|max:5'
         ];
+
 
         $messages = [
-            'record.name.required'   => 'Country Name is required.',
-            'record.name.string'   => 'Country Name contain only alphabets.',
-            'record.name.unique'   => 'Country Name is unique.',
-            'record.name.max'   => 'Country Name is max of 255 charcters.',
+            'record.name.required'   => 'City Name must be required.',
+            'record.name.string'   => 'City Name contain only alphabets.',
+            'record.name.unique'   => 'City Name must be unique.',
+            'record.name.max'   => 'City Name must be max of 255 charcters.',
+            'record.short_name.required'   => 'City Shortname Name must be required.',
+            'record.short_name.string'   => 'City Shortname Name contain only alphabets.',
+            'record.short_name.max'   => 'City Shortname Name must be max of 5 charcters.',
         ];
 
-        $request->validate($rules, $messages);
 
-        $cities = $request->record;
+        $validator  = Validator::make($request->all(), $rules, $messages);
 
-        $city->update($cities);
 
-        return redirect(route('city.index'))->with('success', 'City successfully added.');
+        if ($validator->fails()) {
+            return redirect(route('city.edit', $city->id))
+                ->withErrors($validator->errors()->all())
+                ->withInput();
+        } else {
+            $cities = $request->record;
+    
+            $city->update($cities);
+    
+            return redirect(route('city.index'))->with('success', 'City successfully Update.');
+        }
     }
 
     /**
@@ -129,6 +154,6 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         $city->delete();
-        return redirect(route('city.index'))->with('success', 'Country successfully Delete.');
+        return redirect(route('city.index'))->with('success', 'City successfully Delete.');
     }
 }

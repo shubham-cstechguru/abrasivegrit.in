@@ -37,11 +37,12 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="countryShortname">City Shortand</label>
-                                <input required type="text" name="record[short_name]" class="form-control" id="countryShortname" aria-describedby="countryCodeHelp" placeholder="Enter City Shortand" value="{{ isset($city) ? $city->short_name : '' }}">
+                                <input type="text" name="record[short_name]" class="form-control" id="countryShortname" aria-describedby="countryCodeHelp" placeholder="Enter City Shortand" value="{{ isset($city) ? $city->short_name : '' }}">
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="countryCode">Country</label>
                                 <select class="form-control" name="record[country_id]" id="countryCode">
+                                <option value="">-- Select option --</option>
                                     @foreach($countries as $c)
                                     <option value="{{ $c->id }}" @if(isset($city)) @if($c->id == $city->country_id)
                                         selected
@@ -75,7 +76,7 @@
                                     <th>Number</th>
                                     <th>City name</th>
                                     <th>City shortand</th>
-                                    <th>City code</th>
+                                    <th>Country</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -88,7 +89,7 @@
                                     <td>{{ $i++ }}.</td>
                                     <td>{{ $city->name }}</td>
                                     <td>{{ $city->short_name }}</td>
-                                    <td>{{ $city->country->name }}</td>
+                                    <td>{{ @$city->country->name }}</td>
                                     <td>
                                         <a type="button" name="button" class="btn btn-info" href="{{ route('city.edit', $city->id) }}">
                                             <i class="fas fa-edit"></i>
