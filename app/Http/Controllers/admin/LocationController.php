@@ -17,26 +17,29 @@ class LocationController extends Controller
         $productInfo = Technology::findOrFail($id)->toArray();
         // $productInfo = Technology::findOrFail($id);
 
-        foreach ($cities as $city) {
-            $cityInfo = City::select('slug', 'name')->find($city);
-            $arr = $productInfo;
-            unset($arr['id']);
+        if (!empty($cities)) {
+            foreach ($cities as $city) {
+                $cityInfo = City::select('slug', 'name')->find($city);
+                $arr = $productInfo;
+                unset($arr['id']);
 
-            $slug = $arr['slug'] . "-in-" . $cityInfo->slug;
+                $slug = $arr['slug'] . "-in-" . $cityInfo->slug;
 
-            $is_exists = Technology::where('slug', 'LIKE', $slug)->count();
+                $is_exists = Technology::where('slug', 'LIKE', $slug)->count();
 
-            if (!$is_exists) {
-                $arr['prod_city'] = $city;
-                $arr['slug'] .= "-in-" . $cityInfo->slug;
-                $arr['title'] .= " in " . $cityInfo->name;
-                
-                $product = new Technology($arr);
-                $product->save();
+                if (!$is_exists) {
+                    $arr['prod_city'] = $city;
+                    $arr['slug'] .= "-in-" . $cityInfo->slug;
+                    $arr['title'] .= " in " . $cityInfo->name;
+
+                    $product = new Technology($arr);
+                    $product->save();
+                }
             }
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
-
-        return redirect()->back();
     }
 
     public function country(Request $request, $id)
@@ -46,25 +49,29 @@ class LocationController extends Controller
         $productInfo = Technology::findOrFail($id)->toArray();
         // $productInfo = Technology::findOrFail($id);
 
-        foreach ($countries as $country) {
-            $cityInfo = Country::select('slug', 'name')->find($country);
-            $arr = $productInfo;
-            unset($arr['id']);
+        if (!empty($countries)) {
+            foreach ($countries as $country) {
+                $cityInfo = Country::select('slug', 'name')->find($country);
+                $arr = $productInfo;
+                unset($arr['id']);
 
-            $slug = $arr['slug'] . "-in-" . $cityInfo->slug;
+                $slug = $arr['slug'] . "-in-" . $cityInfo->slug;
 
-            $is_exists = Technology::where('slug', 'LIKE', $slug)->count();
+                $is_exists = Technology::where('slug', 'LIKE', $slug)->count();
 
-            if (!$is_exists) {
-                $arr['prod_country'] = $country;
-                $arr['slug'] .= "-in-" . $cityInfo->slug;
-                $arr['title'] .= " in " . $cityInfo->name;
-                
-                $product = new Technology($arr);
-                $product->save();
+                if (!$is_exists) {
+                    $arr['prod_country'] = $country;
+                    $arr['slug'] .= "-in-" . $cityInfo->slug;
+                    $arr['title'] .= " in " . $cityInfo->name;
+
+                    $product = new Technology($arr);
+                    $product->save();
+                }
             }
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
 
-        return redirect()->back();
     }
 }

@@ -101,7 +101,7 @@ $title = $slug->seo_title!='' ? $slug->seo_title : $slug->title;
 
 		<div class="col-lg-9 mt-1">
 			<div class="col-md-12" style="padding:0px;" id="sidebar_data">
-				<img  src="{{ url('imgs/abrasives-banner.jpg')}}" height="150" alt="{{ $slug->title }}">
+				<img data-src="{{ url('imgs/abrasives-banner.jpg')}}" src="{{url('imgs/loader-2.gif')}}" class="lazy-load" height="150" alt="{{ $slug->title }}">
 			</div>
 			<div class="col-md-12 mt-1" style="background: #f1f1f1">
 				<div class="frnt-url">
@@ -132,9 +132,9 @@ $title = $slug->seo_title!='' ? $slug->seo_title : $slug->title;
 						<div class="sticky">
 							<div>
 							    @if($slug->image!='')
-								<img src="{{url('imgs/product/'.$slug->image)}}" alt="{{ $slug->title }}">
+								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/product/'.$slug->image)}}" alt="{{ $slug->title }}">
 								@else
-								<img class="" src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}">
+								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}">
 								@endif
 							</div>
 							<div class="col-12 mt-2">

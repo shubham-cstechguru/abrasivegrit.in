@@ -32,9 +32,9 @@
                             <div class="card">
                                 <a href="{{ url('blog/'. $list->slug)}}">
                                     @if($list->image!='')
-    								<img src="{{url('imgs/blogs/'.$list->image)}}" alt="{{ $list->title }}" width="251">
+    								<img data-src="{{url('imgs/blogs/'.$list->image)}}" class="lazy-load" src="" alt="{{ $list->title }}" width="251">
     								@else
-    								<img class="" src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}" >
+    								<img class="lazy-load" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" src="" alt="{{ $list->title }}" >
     								@endif
                                 </a>
                                 <div class="pi-text my-3" style="min-height:50px;">

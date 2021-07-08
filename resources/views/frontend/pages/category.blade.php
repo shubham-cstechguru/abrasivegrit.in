@@ -91,7 +91,7 @@
 
 		<div class="col-lg-9">
 			<div class="py-1" id="sidebar_data">
-				<img  src="{{ url('imgs/sand_blasting_dustless_bannner.jpg')}}" >
+				<img data-src="{{ url('imgs/sand_blasting_dustless_bannner.jpg')}}" src="{{url('imgs/loader-2.gif')}}" class="lazy-load">
 			</div>
 			<div class="col-md-12 mt-1" style="background: #f1f1f1">
 				<div class="frnt-url">
@@ -121,9 +121,9 @@
 						<div class="sticky">
 							<div class="img-border">
 							    @if($list->image!='')
-								<img src="{{url('imgs/product/'.$list->image)}}" alt="{{ $list->title }}">
+								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/product/'.$list->image)}}" alt="{{ $list->title }}">
 								@else
-								<img class="" src="{{url('imgs/unavailable-image-300x225.jpg')}}" width="251" height="251">
+								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" width="251" height="251">
 								@endif
 							</div>
 							

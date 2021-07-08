@@ -368,6 +368,19 @@ $date = date('Y')
       ]
     });
   </script>
+
+  <script>
+    $(window).on('load', function() {
+      $('.lazy-load').each(function(event) {
+        let self = $(this);
+        self.attr('src', self.data('src')).removeAttr('data-src');
+
+        self.on('load', function() {
+          $(this).removeClass('lazy-load');
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

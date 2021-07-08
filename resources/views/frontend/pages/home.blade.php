@@ -13,9 +13,9 @@
                         <div class="card">
                             <a href="{{ url('product/'. $list->slug)}}">
                                 @if($list->image!='')
-								<img src="{{url('imgs/product/'.$list->image)}}" alt="{{ $list->title }}" >
+								<img data-src="{{url('imgs/product/'.$list->image)}}" src="{{url('imgs/loader-2.gif')}}" class="lazy-load" alt="{{ $list->title }}" >
 								@else
-								<img class="" src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}" >
+								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}" >
 								@endif
                             </a>
                             <div class="pi-text" style="min-height:50px;">
@@ -108,7 +108,7 @@ thermal conductivity.</li>
       <div class="col-lg-5">
         <div class="side-contant">
           <div class="m8 sw1">
-            <img src="imgs/abrasive2.png" alt="abrasive grit manufacturer in India" class="side-img-brdr" ></div>
+            <img data-src="imgs/abrasive2.png" src="{{url('imgs/loader-2.gif')}}" alt="abrasive grit manufacturer in India" class="side-img-brdr lazy-load" ></div>
             <div style="clear:both"></div>
           </div>
       </div>
@@ -163,9 +163,9 @@ Abrasive Grit is a leader in temporary climate control solutions. Whether you’
                                 <div class="card">
                                     <a href="{{ url('blog/'. $list->slug)}}">
                                         @if($list->image!='')
-        								<img src="{{url('imgs/blogs/'.$list->image)}}" alt="{{ $list->title }}"  >
+        								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/blogs/'.$list->image)}}" alt="{{ $list->title }}"  >
         								@else
-        								<img class="" src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}" >
+        								<img class="lazy-load" src="{{url('imgs/loader-2.gif')}}" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" alt="{{ $list->title }}" >
         								@endif
                                     </a>
                                     <div class="pi-text my-3" style="min-height:50px;">
