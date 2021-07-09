@@ -65,7 +65,7 @@
                 </p>
                 
 
-                <h3 class="col-lg-12 my-5">Social Icons</h3>
+                <h3 class="col-lg-12 my-5">Social Links</h3>
 
                 <p class="col-lg-4">
                     {{ Form::label('facebook') }}

@@ -71,6 +71,7 @@ body {
 
 img {
     width: 100%;
+    height: auto;
 }
 
 .footer-heading {
@@ -181,12 +182,13 @@ h2 {
     font-weight: 500;
     text-align: left;
     min-width: 30%;
-    width: 30%;
+    /* width: 30%; */
     position: relative;
     padding-left: 35px;
     box-sizing: border-box;
     font-size: 15px;
-    margin: 0 1% 10px;
+    /* margin: 0 1% 10px; */
+    padding-bottom: 20px;
 }
 
 .cosmos-list ul li .btm {
@@ -334,7 +336,7 @@ h2 {
 
 .sticky {
     position: sticky;
-    top: 0%;
+    top: 90px;
 }
 
 .product-range {
@@ -343,7 +345,7 @@ h2 {
     cursor: pointer;
     color: #000!important;
     font-size: 15px;
-    padding: 6px 0 6px 35px;
+    padding: 6px 0 6px 20px;
 }
 
 .product-left-list {
@@ -397,7 +399,9 @@ h2 {
     color: #000;
     font-size: 15px;
     margin: 0;
-    /*padding: 5px 0 5px 5px;*/
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 0 0px 5px;
 }
 
 .custom-card .card-body ul li {
@@ -933,13 +937,28 @@ table tr td, th {
 #navbarSupportedContent {
     float: right;
 }
+.error_msgIcon{
+    color: #ff0000;
+}
 
 /* mobile or only mobile */
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
+    .navbar-collapse ul li {
+        border: 1px solid #fafafa;
+        margin-top: 5px;
+        padding-left: 10px;
+        margin-left: 0px !important;
+    }
+    .social-links a span {
+        display: none;
+    }
     #sidebar_data {
         display: none;
     }
+}
+
+@media (max-width: 767px) {
     .remove_padding {
         padding: 0px !important;
     }
@@ -963,14 +982,9 @@ table tr td, th {
         margin: auto;
         background: #f1f1f1;
     }
-    .navbar-collapse ul li {
-        border: 1px solid #fafafa;
-        margin-top: 5px;
-        padding-left: 10px;
-    }
     table {
         display: block;
-        width: 100%;
+        width: 100% !important;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
@@ -1121,9 +1135,9 @@ li {
 }
 
 .city-links a:hover {
-    color: rgba(0,0,0,.7);
+    color: rgba(0, 0, 0, .7);
 }
 
-.city-links a:hover i{
-    color: rgba(0,0,0,.7);
+.city-links a:hover i {
+    color: rgba(0, 0, 0, .7);
 }

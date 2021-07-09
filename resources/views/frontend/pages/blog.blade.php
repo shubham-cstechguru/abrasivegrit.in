@@ -32,14 +32,14 @@
                             <div class="card">
                                 <a href="{{ url('blog/'. $list->slug)}}">
                                     @if($list->image!='')
-    								<img data-src="{{url('imgs/blogs/'.$list->image)}}" class="lazy-load" src="" alt="{{ $list->title }}" width="251">
+    								<img data-src="{{url('imgs/blogs/'.$list->image)}}" class="lazy-load" src="{{url('imgs/loader-2.gif')}}" alt="{{ $list->title }}" width="251">
     								@else
-    								<img class="lazy-load" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" src="" alt="{{ $list->title }}" >
+    								<img class="lazy-load" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" src="{{url('imgs/loader-2.gif')}}" alt="{{ $list->title }}" >
     								@endif
                                 </a>
                                 <div class="pi-text my-3" style="min-height:50px;">
                                     <a href="{{ url('blog/'. $list->slug)}}" style="padding:0;">
-                                        <p class="text-center font-weight-bold">{{$list->title}}</p>
+                                        <p class="text-center font-weight-bold" style="overflow: hidden; min-width: 5ch;  max-width: 25ch; text-overflow: ellipsis; white-space: nowrap;">{{$list->title}}</p>
                                     </a>
                                 </div>
                             </div>    

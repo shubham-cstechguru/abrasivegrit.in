@@ -8,9 +8,14 @@
 
 <div class="page-top-info row">
     <div class="container">
-        <h4>Product</h4>
+        @if(isset($name))
+        <h4>{{ $name }}</h4>
+        @else
+        <h4>Products</h4>
+        @endif
         <div class="site-pagination">
-            <a href="{{ url('/') }}">Home</a> / Product
+            <a href="{{ url('/') }}">Home</a> /
+            @if(isset($name)) {{ $name }} @else Product @endif
         </div>
     </div>
 </div>
@@ -20,7 +25,11 @@
 <section class="row product-filter-section py-5">
     <div class="container">
         <div class="section-title">
-            <h2 class="text-center">PRODUCTS</h2>
+            @if(isset($name))
+            <h2 class="text-center" style="text-transform: uppercase;">{{ $name }}</h2>
+            @else
+            <h2 class="text-center" style="text-transform: uppercase;">PRODUCTS</h2>
+            @endif
             <p class="pt-2 text-center my-5">Abrasive Grit offer Blast abrasives, Steel Shots, SS Shots, Grit, Garnet, Aluminum oxide Abrasives, glass bead blasting for stainless steel etc and qualitative range of industrial steel abrasive products.</p>
         </div>
         <div class="row">
@@ -38,7 +47,7 @@
                             </a>
                             <div class="pi-text my-3" style="min-height:50px;">
                                 <a href="{{ url('product/'.$list->slug) }}" style="padding:0;">
-                                    <p class="text-center font-weight-bold">{{$list->title}}</p>
+                                    <p class="text-center font-weight-bold" style="overflow: hidden; min-width: 5ch;  max-width: 25ch; text-overflow: ellipsis; white-space: nowrap;">{{$list->title}}</p>
                                 </a>
                             </div>
                         </div>

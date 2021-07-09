@@ -11,12 +11,13 @@ class LocationController extends Controller
 {
     public function city($slug)
     {
-        $id = City::where('slug', $slug)->select('id')->first();
+        $id = City::where('slug', $slug)->select('id', 'name')->first();
 
         if (!empty($id)) {
             $product = Technology::where('prod_city', $id->id)->latest()->paginate(12);
 
-            $data = compact('product');
+            $name = $id->name;
+            $data = compact('product', 'name');
 
             return view('frontend.pages.product', $data);
         } else {
@@ -26,12 +27,13 @@ class LocationController extends Controller
 
     public function country($slug)
     {
-        $id = Country::where('slug', $slug)->select('id')->first();
+        $id = Country::where('slug', $slug)->select('id', 'name')->first();
 
         if (!empty($id)) {
             $product = Technology::where('prod_country', $id->id)->latest()->paginate(12);
 
-            $data = compact('product');
+            $name = $id->name;
+            $data = compact('product', 'name');
 
             return view('frontend.pages.product', $data);
         } else {

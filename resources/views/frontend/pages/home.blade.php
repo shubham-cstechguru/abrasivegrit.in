@@ -20,7 +20,7 @@
                             </a>
                             <div class="pi-text" style="min-height:50px;">
                                 <a href="{{ url('product/'. $list->slug)}}" style="padding:0;">
-                                    <p class="text-center font-weight-bold my-3 font-color">{{$list->title}}</p>
+                                    <p class="text-center font-weight-bold my-3 font-color" style="overflow: hidden; min-width: 5ch;  max-width: 45ch; text-overflow: ellipsis; white-space: nowrap;">{{$list->title}}</p>
                                 </a>
                             </div>
                         </div>    
@@ -53,31 +53,31 @@
 <div>
   <div>
     <div>
-    <span style="font-size:1.5rem">Welcome to </span><h1 class="my-4 text-center" style="display:inline-block;font-size:1.2rem;">Abrasive Grit Manufacturer in India</h1>
+    <h1 class="my-4 text-center" style="display:inline-block;font-size:1.2rem;"><span style="font-size:1.5rem">Welcome to </span>Abrasive Grit Manufacturer in India</h1>
    
     <div class="cosmos-list">
-      <ul>
-        <li>
+      <ul class="row">
+        <li class="col-6 col-md-4 m-0">
           <span></span>Nature of Business<br>
           <span class="btm">Abrasive Grit Manufacturer</span>
         </li>
-        <li>
+        <li class="col-6 col-md-4 m-0">
           <span></span>Total Number of Employees<br>
           <span class="btm">26 to 50 People</span>
         </li>
-        <li>
+        <li class="col-6 col-md-4 m-0">
           <span></span>Year of Establishment<br>
           <span class="btm">2000</span>
         </li>
-        <li>
+        <li class="col-6 col-md-4 m-0">
           <span></span>Legal Status of Firm<br>
           <span class="btm">Limited Company (Ltd./Pvt.Ltd.)</span>
         </li>
-        <li>
+        <li class="col-6 col-md-4 m-0">
           <span></span>Annual Turnover<br>
           <span  class="btm">Rs. 2 - 5 Crore</span>
         </li>
-        <li>
+        <li class="col-6 col-md-4 m-0">
           <span class="blow etaSpt gstn"></span>GST No.<br>
           <span  class="btm">09AACCC5777D1ZK</span>
         </li>
@@ -106,7 +106,7 @@ thermal conductivity.</li>
 
       </div>
       <div class="col-lg-5">
-        <div class="side-contant">
+        <div class="side-contant sticky">
           <div class="m8 sw1">
             <img data-src="imgs/abrasive2.png" src="{{url('imgs/loader-2.gif')}}" alt="abrasive grit manufacturer in India" class="side-img-brdr lazy-load" ></div>
             <div style="clear:both"></div>

@@ -20,7 +20,7 @@
                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                      <div class="full text_align_center">
-                        <img class="img-responsive lazy-load" data-src="{{url('imgs/abouts/'.$about->image)}}" src="" alt="Adhesive Tape Manufacturer in India" " />   
+                        <img class="img-responsive lazy-load" data-src="{{url('imgs/abouts/'.$about->image)}}" src="{{url('imgs/loader-2.gif')}}" alt="Adhesive Tape Manufacturer in India" " />   
                       </div>
                   </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pt-5">

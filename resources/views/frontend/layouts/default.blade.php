@@ -3,8 +3,9 @@ $setting = App\Model\Setting::findOrFail(1);
 $blog = App\model\Blog::latest()->paginate(2);
 $cities = App\model\City::get();
 $countries = App\model\Country::get();
-$date = date('Y')
+$date = date('Y');
 
+$whatsapp = preg_replace('/[+\(\)\-\" "]+/', '', $setting->whatsapp);
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +60,7 @@ $date = date('Y')
   <div class="container show_body">
     @section('header')
 
-    <div class="row py-1" style="background:#50adb1;">
+    <div class="row " style="background:#50adb1;">
       <div class="col-lg-6 col-6 text-left">
         <span class="header-mobile"><a href="tel:{{ $setting->mobile_no }}" style="position:relative;" class="f-13"><i class="icon-phone insta-bg" style="color:#fff;margin-left: 12px;"></i><span style="color:#fff;">{{ $setting->mobile_no }}</span></a></span>
       </div>
@@ -67,20 +68,24 @@ $date = date('Y')
         <span class="header-mobile f-13" onclick="open_pop()" style="color:#fff;margin-right:12px;">Send Email <i class="icon-envelop insta-bg" style="color:#fff;"></i></span>
       </div>
     </div>
-    <div class="row py-3" style="background-color: #fff;-webkit-box-shadow: 0px 6px 10px -5px rgba(0,0,0,0.75);position: sticky;top: 0;z-index: 2;">
-      <div class="col-lg-4 col-3">
+    <div class="row " style="background-color: #fff;-webkit-box-shadow: 0px 6px 10px -5px rgba(0,0,0,0.75);position: sticky;top: 0;z-index: 2;">
+      <!-- <div class="col-lg-4 col-3">
         <a href="{{url('/')}}" class="navbar-brand" style="padding:0px;margin-left:15px;">
           <img src="{{ url('imgs/'.$setting->logo) }}" alt="$setting->sitename">
         </a>
-      </div>
-      <div class="col-lg-8 col-9">
-        <nav class="navbar navbar-expand-lg navbar-light float-right">
+      </div> -->
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+          <a class="navbar-brand" href="{{url('/')}}">
+            <img src="{{ url('imgs/'.$setting->logo) }}" alt="$setting->sitename" alt="">
+          </a>
 
           <button class="navbar-toggler" style="margin-left:auto;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse ml-5 mt-3" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse my-3" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item" style="text-align:right;">
                 <a class="nav-link" href="{{ url('/') }}">Home </a>
@@ -240,11 +245,11 @@ $date = date('Y')
               </div>
               <div class="con-info">
                 <span><i class="icon-whatsapp"></i></span>
-                <p>{{ $setting->mobile_no }}</p>
+                <p><a href="https://wa.me/{{ $whatsapp }}" target="_blank" rel="noopener noreferrer" style="color: #fff;">{{ $setting->whatsapp }}</a></p>
               </div>
               <div class="con-info">
                 <span><i class="icon-envelop"></i></span>
-                <p><a href="https://colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc2cbcbc4cec8edd4c2d8dfc8c0ccc4c183cec2c0">{{ $setting->email }}</a></p>
+                <p><a href="https://colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc2cbcbc4cec8edd4c2d8dfc8c0ccc4c183cec2c0" style="color: #fff;">{{ $setting->email }}</a></p>
               </div>
             </div>
           </div>
@@ -253,13 +258,13 @@ $date = date('Y')
       <div class="social-links-warp text-center">
         <div class="container">
           <div class="social-links text-center">
-            <a href="#" class="instagram"><i class="icon-instagram"></i><span>instagram</span></a>
-            <a href="#" class="google-plus"><i class="icon-google-plus"></i><span>g+plus</span></a>
-            <a href="#" class="pinterest"><i class="icon-pinterest"></i><span>pinterest</span></a>
-            <a href="#" class="facebook"><i class="icon-facebook"></i><span>facebook</span></a>
-            <a href="#" class="twitter"><i class="icon-twitter"></i><span>twitter</span></a>
-            <a href="#" class="youtube"><i class="icon-youtube"></i><span>youtube</span></a>
-            <!--<a href="#" class="tumblr"><i class="icon-tumblr-square"></i><span>tumblr</span></a>-->
+            <a href="{{ $setting->instagram }}" class="instagram"><i class="icon-instagram"></i><span>instagram</span></a>
+           {{-- <a href="{{ $setting-> }}" class="google-plus"><i class="icon-google-plus"></i><span>g+plus</span></a>
+            <a href="{{ $setting-> }}" class="pinterest"><i class="icon-pinterest"></i><span>pinterest</span></a>
+            <a href="{{ $setting-> }}" class="tumblr"><i class="icon-tumblr-square"></i><span>tumblr</span></a>
+            <a href="{{ $setting-> }}" class="twitter"><i class="icon-twitter"></i><span>twitter</span></a>--}}
+            <a href="{{ $setting->facebook }}" class="facebook"><i class="icon-facebook"></i><span>facebook</span></a>
+            <a href="{{ $setting->youtube }}" class="youtube"><i class="icon-youtube"></i><span>youtube</span></a>
           </div>
 
           <p class="text-white text-center mt-5">Copyright &copy; {{$date}} All rights reserved {{ $setting->sitename }}. Website Design and Developed by A2ZProviders</p>
@@ -272,115 +277,106 @@ $date = date('Y')
   </div>
   </div>
   </div>
-  <!-- ALL JS FILES -->
-  {{ Html::script('js/jquery.min.js') }}
-  {{ Html::script('js/popper.min.js') }}
-  {{ Html::script('js/bootstrap.min.js') }}
-  {{ Html::script('js/ajax.js') }}
-
-  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="enquiryModal" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <p class="modal-title other-heading">Send Enquiry</p>
+          <p class="modal-title other-heading" id="enquiryModalLabel">Send Enquiry</p>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        {{ Form::open(['id'=>'inquiry_form', 'method'=>'post', 'url'=> route('ajax-route')]) }}
         <div class="modal-body">
-          {{ Form::open(['id'=>'inquiry_form', 'method'=>'post', 'data-url'=> route('ajax-route')]) }}
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="user_name">Name</label>
-                <input type="text" class="form-control" id="user_name" placeholder="Enter your name">
-              </div>
+            <div class="form-group col-md-12">
+              <label for="user_name">Name</label>
+              <input required type="text" class="form-control name" id="user_name" placeholder="Enter your name">
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="user_email">Email address</label>
-                <input type="email" class="form-control" id="user_email" placeholder="Enter email">
-              </div>
+
+            <div class="form-group col-md-6">
+              <label for="user_email">Email address</label>
+              <input required type="email" class="form-control email" id="user_email" placeholder="Enter email">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="user_mobile">Mobile Number</label>
-                <input type="tel" class="form-control" id="user_mobile" placeholder="Enter mobile number">
-              </div>
+
+            <div class="form-group col-md-6">
+              <label for="user_mobile">Mobile Number</label>
+              <input required type="tel" class="form-control mobile" id="user_mobile" placeholder="Enter mobile number">
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" placeholder="Enter country">
-              </div>
+            <div class="form-group col-md-12">
+              <label for="user_message">Enquiry text</label>
+              <textarea required class="form-control message" id="user_message" rows="3"></textarea>
+            </div>
+            <div class="col-md-12">
+              <p id="ajax_message" class="text-success"></p>
+              <button type="submit" class="btn btn-primary popups-btn">Send</button>
             </div>
           </div>
-          <div class="form-group">
-            <label for="user_message">Enquiry text</label>
-            <textarea class="form-control" id="user_message" rows="3"></textarea>
-          </div>
-          <p id="ajax_message" class="text-success"></p>
-          <button type="submit" class="btn btn-primary popups-btn">Send</button>
-          {{ Form::close() }}
         </div>
+        {{ Form::close() }}
       </div>
     </div>
-  </div>
-  {{ Html::script('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js') }}
-  <script>
-    function open_pop() {
-      $('.modal').modal('show');
-    }
-    $('.responsive').slick({
+    <!-- ALL JS FILES -->
+    {{ Html::script('js/jquery.min.js') }}
+    {{ Html::script('js/popper.min.js') }}
+    {{ Html::script('js/bootstrap.min.js') }}
+    {{ Html::script('js/ajax.js') }}
 
-      infinite: true,
-      speed: 3000,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      responsive: [{
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    });
-  </script>
+    {{ Html::script('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js') }}
+    <script>
+      $('.responsive').slick({
 
-  <script>
-    $(window).on('load', function() {
-      $('.lazy-load').each(function(event) {
-        let self = $(this);
-        self.attr('src', self.data('src')).removeAttr('data-src');
+        infinite: true,
+        speed: 3000,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        responsive: [{
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              infinite: false,
+              dots: false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+    </script>
 
-        self.on('load', function() {
-          $(this).removeClass('lazy-load');
+    <script>
+      $(window).on('load', function() {
+        $('.lazy-load').each(function(event) {
+          let self = $(this);
+          self.attr('src', self.data('src')).removeAttr('data-src');
+
+          self.on('load', function() {
+            $(this).removeClass('lazy-load');
+          });
         });
       });
-    });
-  </script>
+    </script>
+    <script>
+      function open_pop() {
+        $('#enquiryModal').modal('show');
+      }
+    </script>
 </body>
 
 </html>
