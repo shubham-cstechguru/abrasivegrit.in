@@ -97,15 +97,12 @@
 										@endif
 									</td>
 									<td>
-										@if(!empty($list->prod_city))
-										<div>{{ $list->city->name }}</div>
+										@if(!empty($list->prod_city) || !empty($list->prod_country))
+										<div>{{ @$list->city->name }}</div>
+
+										<div>{{ @$list->country->name }}</div>
 										@else
 										<a href="javascript:void(0)" onclick="addcity({{ $list->id }})">City</a>&nbsp;|
-										@endif
-
-										@if(!empty($list->prod_country))
-										<div>{{ $list->country->name }}</div>
-										@else
 										<a href="javascript:void(0)" onclick="addcountry({{ $list->id }})">Country</a>
 										@endif
 									</td>

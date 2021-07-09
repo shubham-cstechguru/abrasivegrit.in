@@ -46,7 +46,7 @@
                                 @endif
                             </a>
                             <div class="pi-text my-3" style="min-height:50px;">
-                                <a href="{{ url('product/'.$list->slug) }}" style="padding:0;">
+                                <a href="{{ route('productindex', $list->slug) }}" style="padding:0;">
                                     <p class="text-center font-weight-bold" style="overflow: hidden; min-width: 5ch;  max-width: 25ch; text-overflow: ellipsis; white-space: nowrap;">{{$list->title}}</p>
                                 </a>
                             </div>

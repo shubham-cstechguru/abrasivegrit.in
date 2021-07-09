@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index'); 
 
 Route::get('category/{category:slug_category}', 'CategoryController@index');
-Route::get('product/{slug:slug}', 'SingleProductController@index');
+Route::get('product/{slug:slug}', 'SingleProductController@index')->name('productindex');
 Route::get('blog/{slug:slug}', 'SingleBlogController@index');
 Route::get('/about', 'AboutusController@index'); 
 Route::get('/blog', 'BlogController@index'); 
@@ -24,6 +24,8 @@ Route::get('/product', 'ProductController@index');
 Route::get('/contact', 'ContactController@index'); 
 Route::get('/city/{slug}', 'LocationController@city')->name('frontcity'); 
 Route::get('/country/{slug}', 'LocationController@country')->name('frontcountry'); 
+Route::get('city/{city:slug}/{slug:slug}', 'SingleProductController@productcity')->name('poductindexcity');
+Route::get('country/{country:slug}/{slug:slug}', 'SingleProductController@productcountry')->name('poductindexcountry');
 Route::get('sitemap.xml/', 'SitemapController@index');
 Route::get('sitemap.xml/product', 'SitemapController@articles');
 Route::get('sitemap.xml/category', 'SitemapController@categories');
