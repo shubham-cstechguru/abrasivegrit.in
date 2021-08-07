@@ -46,6 +46,7 @@ Route::get('/clear-cache', function() {
     Route::post('product/edit/{id}', 'admin\TechnologyController@editdata');
     Route::get('product/remove/{id}','admin\TechnologyController@remove');
     Route::post('product/removeMultiple','admin\TechnologyController@removeMultiple');    
+    Route::get('product/{id}/removeimage/{imgid}/', 'admin\TechnologyController@removeimage');
     
     
     

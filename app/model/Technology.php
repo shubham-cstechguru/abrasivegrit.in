@@ -10,6 +10,19 @@ class Technology extends Model
 
 	protected $table 		= "technology";
 
+	protected $appends = ['product_img'];
+
+	public function getProductImgAttribute() {
+        $images = [];
+        if(!empty($this->prod_img)) {
+            foreach($this->prod_img as $key => $img) {
+                $images[] = $img->image;
+            }
+        }
+
+        return $images;
+    }
+
 	public function cat()
 	{
 		return $this->hasOne('App\model\Category', 'id', 'parent');
@@ -24,4 +37,8 @@ class Technology extends Model
 	{
 		return $this->hasOne('App\model\Country', 'id', 'prod_country');
 	}
+
+	public function prod_img() {
+        return $this->belongsToMany(Image::class, 'prod_images', 'prod_id', 'image_id');
+    }
 }

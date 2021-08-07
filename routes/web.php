@@ -21,6 +21,7 @@ Route::get('blog/{slug:slug}', 'SingleBlogController@index');
 Route::get('/about', 'AboutusController@index'); 
 Route::get('/blog', 'BlogController@index'); 
 Route::get('/product', 'ProductController@index'); 
+Route::get('/productfilter', 'ProductController@filter')->name('productfilter');
 Route::get('/contact', 'ContactController@index'); 
 Route::get('/city/{slug}', 'LocationController@city')->name('frontcity'); 
 Route::get('/country/{slug}', 'LocationController@country')->name('frontcountry'); 
@@ -32,6 +33,7 @@ Route::get('sitemap.xml/category', 'SitemapController@categories');
 Route::get('sitemap.xml/blog', 'SitemapController@blogs');
 Route::get('sitemap.xml/page', 'SitemapController@pages');
 Route::post('ajax_request', 'AjaxController@index')->name('ajax-route');
+Route::post('search', 'AjaxController@search')->name('ajax-search');
 
     
 Route::get('pagenotfound', ['as' => 'notfound', 'uses' => 'HomeController@pagenotfound']);

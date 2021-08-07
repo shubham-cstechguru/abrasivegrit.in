@@ -6,68 +6,75 @@
 @section('canonical',URL::current())
 @section('contant')
 
-<div class="page-top-info row">
-    <div class="container">
-        @if(isset($name))
-        <h4>{{ $name }}</h4>
-        @else
-        <h4>Products</h4>
-        @endif
-        <div class="site-pagination">
-            <a href="{{ url('/') }}">Home</a> /
-            @if(isset($name)) {{ $name }} @else Product @endif
-        </div>
-    </div>
-</div>
+<div class="row">
+    <div class="col-lg-3 pt-4 pb-0 mt-1" id="sidebar_data">
+        <div class="sticky">
 
-<!--</section>-->
-@if(!$product->isEmpty())
-<section class="row product-filter-section py-5">
-    <div class="container">
-        <div class="section-title">
-            @if(isset($name))
-            <h2 class="text-center" style="text-transform: uppercase;">{{ $name }}</h2>
-            @else
-            <h2 class="text-center" style="text-transform: uppercase;">PRODUCTS</h2>
-            @endif
-            <p class="pt-2 text-center my-5">Abrasive Grit offer Blast abrasives, Steel Shots, SS Shots, Grit, Garnet, Aluminum oxide Abrasives, glass bead blasting for stainless steel etc and qualitative range of industrial steel abrasive products.</p>
-        </div>
-        <div class="row">
-            @foreach($product as $list)
-            <div class="col-lg-3 col-sm-6 mb-4">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <div class="card">
-                            <a href="{{url('product/'.$list->slug) }}">
-                                @if($list->image!='')
-                                <img class="lazy-load" data-src="{{url('imgs/product/'.$list->image)}}" src="{{url('imgs/loader-2.gif')}}" alt="{{ $list->title }}" width="251">
-                                @else
-                                <img class="lazy-load" data-src="{{url('imgs/unavailable-image-300x225.jpg')}}" src="{{url('imgs/loader-2.gif')}}" alt="{{ $list->title }}">
-                                @endif
-                            </a>
-                            <div class="pi-text my-3" style="min-height:50px;">
-                                <a href="{{ route('productindex', $list->slug) }}" style="padding:0;">
-                                    <p class="text-center font-weight-bold" style="overflow: hidden; min-width: 5ch;  max-width: 25ch; text-overflow: ellipsis; white-space: nowrap;">{{$list->title}}</p>
-                                </a>
+            <p class="product-range my-0">Filter By Categories</p>
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                <!-- Accordion card -->
+
+                <div class="custom-card">
+
+                    <!-- Card header -->
+
+                    <div class="mx-2" role="tab" id="headingOne1">
+                        @foreach( $category1 as $list )
+                        <div class="form-check productfilter mt-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <input type="checkbox" name="searchtext[]" class="form-check-input filter" id="{{ $list->id }}" value="{{ $list->id }}">
+                                    <input type="hidden" name="name" class="form-check-input name" id="{{ @$name }}" value="{{ @$name->id }}">
+                                    <input type="hidden" name="namec" class="form-check-input namec" id="{{ @$c }}" value="{{ @$c }}">
+                                </div>
+                                <div class="col-10">
+                                    <label style="overflow: hidden; min-width: 5ch;  max-width: 25ch; text-overflow: ellipsis; white-space: nowrap;" for="{{ $list->id }}" class="form-check-label">{{ $list->category }}</label>
+                                </div>
                             </div>
                         </div>
+
+                        @endforeach
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
-        {{ $product->links() }}
-    </div>
-</section>
-@else
-<section class="row product-filter-section py-5">
-    <div class="container">
-        <div class="row">
+        <span id="baseUrl" data-url="{{ route('productfilter') }}"></span>
 
-            <div class="col-12 text-center">No Products Found</div>
+    </div>
+
+    <div class="col-lg-9 mt-1">
+        <div class="page-top-info row">
+            <div class="container">
+                @if(isset($name))
+                <h4>{{ $name->name  }}</h4>
+                @else
+                <h4>Products</h4>
+                @endif
+                <div class="site-pagination">
+                    <a href="{{ url('/') }}">Home</a> /
+                    @if(isset($name)) {{ $name->name  }} @else Product @endif
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-@endif
 
+        <!--</section>-->
+        @if(!$product->isEmpty())
+        <section class="row product-filter-section py-5" id="prod_list">
+            @include('frontend.templates.product', compact('product'))
+        </section>
+        @else
+        <section class="row product-filter-section py-5">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12 text-center">No Products Found</div>
+                </div>
+            </div>
+        </section>
+        @endif
+
+
+    </div>
+</div>
 @stop

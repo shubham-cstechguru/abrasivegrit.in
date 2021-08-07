@@ -12,6 +12,8 @@ use App\model\Technology;
 use App\model\Category;
 use App\model\City;
 use App\model\Country;
+use App\model\Image as ModelImage;
+use App\model\ProdImage;
 
 class TechnologyController extends Controller{
    
@@ -25,6 +27,7 @@ class TechnologyController extends Controller{
 
 
         $lists1 = $query->paginate(10);     
+        $lists1->appends(['title' => $request->title]);
         
         $cities = City::get();
         $countries = Country::get();
@@ -100,6 +103,33 @@ class TechnologyController extends Controller{
         
         $obj->save();
 
+        if ($request->hasFile('images')) {
+            $image       = $request->file('images');
+
+            foreach ($image as $l) {
+                $img = new ModelImage();
+                $proimg = new ProdImage();
+
+                $filename    = time() . '.' . $l->extension();
+                $image_resize = Image::make($l->getRealPath());
+                $image_resize->resize(251, 251);
+                $image_resize->save(public_path('imgs/product/' . $filename));
+
+                $banner_resize = Image::make($l->getRealPath());
+                $banner_resize->resize(251, 251);
+                $banner_resize->save(public_path('imgs/product/original/' . $filename));
+
+                $img->image    = $filename;
+
+                $img->save();
+                $update_i = ModelImage::findOrFail($img->id);
+                $update_p = Technology::findOrFail($obj->id);
+                $proimg->image_id = $update_i->id;
+                $proimg->prod_id = $update_p->id;
+                $proimg->save();
+            }
+        }
+
         return redirect( url('admin-control/product/') )->with('success', 'Success! New record has been added.');
     }
 
@@ -170,6 +200,29 @@ class TechnologyController extends Controller{
         
         $obj->save();
 
+        if ($request->hasFile('images')) {
+            $image       = $request->file('images');
+
+            foreach ($image as $l) {
+                $img = new ModelImage();
+                $proimg = new ProdImage();
+
+                $filename    = time() . '.' . $l->extension();
+                $image_resize = Image::make($l->getRealPath());
+                $image_resize->resize(2048, 2048);
+                $image_resize->save(public_path('imgs/product/' . $filename));
+
+                $img->image    = $filename;
+
+                $img->save();
+                $update_i = ModelImage::findOrFail($img->id);
+                $update_p = Technology::findOrFail($obj->id);
+                $proimg->image_id = $update_i->id;
+                $proimg->prod_id = $update_p->id;
+                $proimg->save();
+            }
+        }
+
         return redirect( url('admin-control/product') )->with('success', 'Success! A record has been updated.');
     }
      public function remove(  $id ){
@@ -185,5 +238,15 @@ class TechnologyController extends Controller{
         return redirect()->back()->with('success', 'Item(s) removed.');
     }
 
-   
+    public function removeimage($id, $img)
+    {
+        $img = ModelImage::findOrFail($img);
+        $path = public_path('imgs/product/');
+        if (file_exists($path . '/' . $img->image)) {
+            unlink($path . '/' . $img->image);
+        }
+        $img->delete();
+
+        return redirect(url('admin-control/product'))->with('success', 'Success! A image has been deleted.');
+    }
 }
